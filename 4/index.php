@@ -1,6 +1,9 @@
 <?php
 
-$config = require_once 'config/database.php';
+const ROOT_PATH = __DIR__;
 
-var_dump($config);
+require_once 'database/database.php';
 
+$database = new Database();
+
+var_dump($database);
