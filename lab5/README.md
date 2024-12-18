@@ -16,7 +16,7 @@
 create table clients(
     id int auto_increment primary key,
     full_name varchar(255) not null,
-    phone varchar(11)  not null,
+    phone varchar(12)  not null,
     passport_number varchar(15) null
 );
 

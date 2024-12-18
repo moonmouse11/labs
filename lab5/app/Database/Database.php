@@ -8,9 +8,10 @@ use PDOException;
 
 class Database
 {
+    private static self $instance;
     public $connection = null;
 
-    public function __construct()
+    private function __construct()
     {
         $credentials = DatabaseConfig::CONNECTION;
 
@@ -23,5 +24,12 @@ class Database
         } catch (PDOException $e) {
             echo 'Connection failed: ' . $e->getMessage();
         }
+    }
+
+    private function __clone(){}
+
+    public static function getInstance()
+    {
+        return self::$instance ?? (self::$instance = new self());
     }
 }
