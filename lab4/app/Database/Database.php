@@ -64,4 +64,22 @@ class Database
             return false;
         }
     }
+
+    public function searchBrand($brand)
+    {
+        $brand = htmlspecialchars($brand);
+
+        return $this->connection->query(
+            "SELECT title, picture FROM tents WHERE brand = '$brand'"
+        )->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function searchNumber($number)
+    {
+        $number = (int) htmlspecialchars($number);
+
+        return $this->connection->query(
+            "SELECT title, description FROM tents WHERE places = '$number'"
+        )->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
