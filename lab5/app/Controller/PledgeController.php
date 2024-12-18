@@ -20,12 +20,30 @@ class PledgeController
 
     public function save($data)
     {
+        if ($this->validate($data)) {
+            $database = Database::getInstance();
 
+            return $database->connection->query(
+                "INSERT INTO pledges (name, price, start_date, over_date, client_id, expert_id) 
+                VALUES ('{$data['name']}','{$data['price']}','{$data['start_date']}','{$data['over_date']}','{$data['client_id']}','{$data['expert_id']}');"
+            );
+        }
+
+        return false;
     }
 
     public function update($id, $data)
     {
+        if ($this->validate($data)) {
+            $database = Database::getInstance();
 
+            return $database->connection->query(
+                "INSERT INTO pledges (name, price, start_date, over_date, client_id, expert_id) 
+                VALUES ('{$data['name']}','{$data['price']}','{$data['start_date']}','{$data['over_date']}','{$data['client_id']}','{$data['expert_id']}');"
+            );
+        }
+
+        return false;
     }
 
     public function delete($id)
@@ -33,5 +51,10 @@ class PledgeController
         $database = Database::getInstance();
 
         return $database->connection->query("DELETE FROM pleges WHERE id = '$id';")->fetch();
+    }
+
+    private function validate($data)
+    {
+        return true;
     }
 }

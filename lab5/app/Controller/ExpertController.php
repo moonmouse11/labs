@@ -12,7 +12,8 @@ class ExpertController
         $database = Database::getInstance();
 
         return $database->connection->query(
-            'SELECT * FROM experts LEFT JOIN lab5.types_experts te on experts.id = te.expert_id')->fetchAll(PDO::FETCH_ASSOC);
+            'SELECT * FROM experts LEFT JOIN lab5.types_experts te on experts.id = te.expert_id'
+        )->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function save($data)
@@ -46,4 +47,8 @@ class ExpertController
         )->fetch();
     }
 
+    private function validate($data)
+    {
+        return true;
+    }
 }

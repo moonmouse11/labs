@@ -16,16 +16,24 @@ class ClientController
 
     public function save($data)
     {
-        $database = Database::getInstance();
+        if ($this->validate($data)) {
+            $database = Database::getInstance();
 
-        return $database->connection->query('SELECT * FROM clients;')->fetchAll(PDO::FETCH_ASSOC);
+            return $database->connection->query('SELECT * FROM clients;')->fetch();
+        }
+
+        return false;
     }
 
     public function update($id, $data)
     {
-        $database = Database::getInstance();
+        if ($this->validate($data)) {
+            $database = Database::getInstance();
 
-        return $database->connection->query('SELECT * FROM clients;')->fetchAll(PDO::FETCH_ASSOC);
+            return $database->connection->query('SELECT * FROM clients;')->fetch();
+        }
+
+        return false;
     }
 
     public function delete($id)
@@ -33,5 +41,10 @@ class ClientController
         $database = Database::getInstance();
 
         return $database->connection->query("DELETE FROM clients WHERE id = '$id';")->fetch();
+    }
+
+    private function validate($data)
+    {
+        return true;
     }
 }
