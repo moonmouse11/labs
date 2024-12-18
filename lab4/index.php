@@ -1,11 +1,10 @@
 <?php
 
-const ROOT_PATH = __DIR__;
+require 'vendor/autoload.php';
 
-require_once 'database/database.php';
+//$database = new Labs\Lab4\Database\Database();
+$import = new \Labs\Lab4\Database\Import();
 
-require_once 'database/importCsv.php';
-
-
+$import->importData();
 
 

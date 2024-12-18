@@ -1,0 +1,9 @@
+{
+    "name": "labs/lab4",
+    "autoload": {
+        "psr-4": {
+            "Labs\\Lab4\\": "app/"
+        }
+    },
+    "require": {}
+}
