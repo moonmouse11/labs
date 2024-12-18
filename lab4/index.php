@@ -4,6 +4,8 @@ const ROOT_PATH = __DIR__;
 
 require_once 'database/database.php';
 
-$database = new Database();
+require_once 'database/importCsv.php';
 
-var_dump($database);
+
+
+

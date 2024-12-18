@@ -2,7 +2,7 @@
 
 return [
     'connection' => [
-        'host' => '127.0.0.1',
+        'host' => '0.0.0.0',
         'port' => 3306,
         'dbname' => 'lab4',
         'charset' => 'utf8mb4',
