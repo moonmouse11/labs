@@ -52,5 +52,16 @@ class Database
         }
     }
 
-
+    public function checkCredentials($user, $password)
+    {
+        try {
+            return (bool) new PDO(
+                "mysql:host={$this->credentials['host']};dbname={$this->credentials['dbname']};port={$this->credentials['port']}",
+                $user,
+                $password
+            );
+        } catch (PDOException $e){
+            return false;
+        }
+    }
 }

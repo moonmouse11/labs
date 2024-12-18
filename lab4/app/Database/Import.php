@@ -6,7 +6,7 @@ class Import
 {
     private $database = null;
     private $csvResource = null;
-    private const CSV_FILE_PATH = 'csv/tents.csv';
+    private const CSV_FILE_PATH = __DIR__ . '/csv/tents.csv';
 
     public function __construct()
     {
