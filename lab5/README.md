@@ -36,8 +36,8 @@ create table types_experts
 (
     type_id int,
     expert_id int,
-    foreign key (type_id) references types(id),
-    foreign key (expert_id) references experts(id)
+    foreign key (type_id) references types(id) on delete cascade,
+    foreign key (expert_id) references experts(id) on delete cascade
 );
 
 create table pledges(
@@ -48,8 +48,8 @@ create table pledges(
     over_date date,
     client_id int not null,
     expert_id int not null,
-    foreign key (client_id) references clients(id),
-    foreign key (expert_id) references experts(id)
+    foreign key (client_id) references clients(id) on delete no action,
+    foreign key (expert_id) references experts(id) on delete no action 
 );
 ```
 

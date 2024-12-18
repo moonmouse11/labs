@@ -10,6 +10,7 @@ class PledgeController
     public function index()
     {
         $database = Database::getInstance();
+
         return $database->connection->query(
             'SELECT * FROM pledges
             LEFT JOIN lab5.clients c ON c.id = pledges.client_id
@@ -17,15 +18,20 @@ class PledgeController
         )->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function save()
+    public function save($data)
     {
+
     }
 
-    public function update()
+    public function update($id, $data)
     {
+
     }
 
-    public function delete()
+    public function delete($id)
     {
+        $database = Database::getInstance();
+
+        return $database->connection->query("DELETE FROM pleges WHERE id = '$id';")->fetch();
     }
 }
