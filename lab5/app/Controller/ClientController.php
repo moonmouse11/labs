@@ -19,7 +19,10 @@ class ClientController
         if ($this->validate($data)) {
             $database = Database::getInstance();
 
-            return $database->connection->query('SELECT * FROM clients;')->fetch();
+            return $database->connection->query(
+                "INSERT INTO clients (full_name, phone, passport_number)
+                VALUES ('{$data['full_name']}','{$data['phone']}','{$data['passport_number']}');"
+            )->fetch();
         }
 
         return false;
@@ -30,7 +33,13 @@ class ClientController
         if ($this->validate($data)) {
             $database = Database::getInstance();
 
-            return $database->connection->query('SELECT * FROM clients;')->fetch();
+            return $database->connection->query(
+                "UPDATE clients SET
+                   full_name = '{$data['full_name']}',
+                   phone = '{$data['phone']}',
+                   passport_number = '{$data['passport_number']}'
+                WHERE id = '{$id}';"
+            )->fetch();
         }
 
         return false;

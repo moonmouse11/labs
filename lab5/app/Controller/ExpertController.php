@@ -24,7 +24,7 @@ class ExpertController
             'SELECT * FROM pledges
             LEFT JOIN lab5.clients c ON c.id = pledges.client_id
             LEFT JOIN lab5.experts e ON e.id = pledges.expert_id'
-        )->fetchAll(PDO::FETCH_ASSOC);
+        )->fetch();
     }
 
     public function update($id, $data)
@@ -35,7 +35,7 @@ class ExpertController
             'SELECT * FROM pledges
             LEFT JOIN lab5.clients c ON c.id = pledges.client_id
             LEFT JOIN lab5.experts e ON e.id = pledges.expert_id'
-        )->fetchAll(PDO::FETCH_ASSOC);
+        )->fetch();
     }
 
     public function delete($id)
