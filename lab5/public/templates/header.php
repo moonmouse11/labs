@@ -7,6 +7,28 @@ require '../vendor/autoload.php';
 <head>
     <title>Залоги ломбард</title>
     <style>
+        nav {
+            text-align: center;
+        }
+
+        nav ul {
+            position: relative;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: inline-flex;
+        }
+
+        nav li {
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-align: center;
+            color: #000;
+            text-decoration: none;
+        }
+
         .table_component {
             overflow: auto;
             width: 100%;
@@ -76,6 +98,23 @@ require '../vendor/autoload.php';
             padding: 5px;
             cursor: pointer;
         }
+
+        #Client, #Expert {
+            background-position: 10px 12px; /* Расположите значок поиска */
+            background-repeat: no-repeat; /* Не повторяйте изображение значка */
+            width: 100%; /* Полная ширина */
+            font-size: 16px; /* Увеличить размер шрифта */
+            padding: 12px 20px 12px 40px; /* Добавить немного отступов */
+            border: 1px solid #ddd; /* Добавить серую границу */
+            margin-bottom: 12px; /* Добавить некоторое пространство под входом */
+        }
+
+        #Pledges, #Clients, #Experts {
+            border-collapse: collapse; /* Свернуть границы */
+            width: 100%; /* Полная ширина */
+            /*border: 1px solid #ddd; !* Добавить серую границу *!*/
+            font-size: 18px; /* Увеличить размер шрифта */
+        }
     </style>
 </head>
 <body>
@@ -89,4 +128,5 @@ require '../vendor/autoload.php';
         </li>
     </ul>
 </nav>
+<hr>
 
