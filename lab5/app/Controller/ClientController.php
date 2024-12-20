@@ -14,6 +14,13 @@ class ClientController
         return $database->connection->query('SELECT * FROM clients;')->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function get($id)
+    {
+        $database = Database::getInstance();
+
+        return $database->connection->query("SELECT * FROM clients WHERE id = '{$id}';")->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function save($data)
     {
         if ($this->validate($data)) {

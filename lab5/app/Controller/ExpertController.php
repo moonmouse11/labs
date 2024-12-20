@@ -16,26 +16,45 @@ class ExpertController
         )->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function save($data)
+    public function get($id)
     {
         $database = Database::getInstance();
 
         return $database->connection->query(
-            'SELECT * FROM pledges
-            LEFT JOIN lab5.clients c ON c.id = pledges.client_id
-            LEFT JOIN lab5.experts e ON e.id = pledges.expert_id'
-        )->fetch();
+            "SELECT * FROM experts LEFT JOIN lab5.types_experts te on experts.id = te.expert_id WHERE experts.id = '{$id}'"
+        )->fetch(PDO::FETCH_ASSOC);
+    }
+
+
+    public function save($data)
+    {
+        if($this->validate($data)) {
+            $database = Database::getInstance();
+
+            return $database->connection->query(
+                "INSERT INTO experts (full_name, phone, hiring_date)
+                VALUES ('{$data['full_name']}','{$data['phone']}','{$data['hiring_date']}');"
+            )->fetch();
+        }
+
+        return false;
     }
 
     public function update($id, $data)
     {
-        $database = Database::getInstance();
+        if ($this->validate($data)) {
+            $database = Database::getInstance();
 
-        return $database->connection->query(
-            'SELECT * FROM pledges
-            LEFT JOIN lab5.clients c ON c.id = pledges.client_id
-            LEFT JOIN lab5.experts e ON e.id = pledges.expert_id'
-        )->fetch();
+            return $database->connection->query(
+                "UPDATE experts SET
+                   full_name = '{$data['full_name']}',
+                   phone = '{$data['phone']}',
+                   hiring_date = '{$data['hiring_date']}'
+                WHERE id = '{$id}';"
+            )->fetch();
+        }
+
+        return false;
     }
 
     public function delete($id)

@@ -1,6 +1,6 @@
 <?php
 
-require '../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 ?>
 <html>
@@ -27,6 +27,57 @@ require '../vendor/autoload.php';
             text-align: center;
             color: #000;
             text-decoration: none;
+        }
+
+        .form_component {
+            position: unset;
+            list-style: none;
+            width: 30%;
+            padding: 12px 20px 12px 40px;
+            margin-bottom: 12px;
+            margin-left: auto;
+            margin-right: auto;
+            display: grid;
+        }
+
+        .form_component input {
+            border-collapse: collapse; /* Свернуть границы */
+            width: 100%; /* Полная ширина */
+            /*border: 1px solid #ddd; !* Добавить серую границу *!*/
+            font-size: 18px; /* Увеличить размер шрифта */
+            margin-bottom: 10px;
+        }
+
+        .form_component select {
+            border-collapse: collapse; /* Свернуть границы */
+            width: 100%; /* Полная ширина */
+            /*border: 1px solid #ddd; !* Добавить серую границу *!*/
+            font-size: 18px; /* Увеличить размер шрифта */
+            margin-bottom: 10px;
+        }
+
+        .form_component button.create {
+            place-items: normal;
+            position: initial;
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+            background-color: green;
+            color: black;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+
+        .form_component button.update {
+            text-align: left;
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+            background-color: dodgerblue;
+            color: black;
+            padding: 5px;
+            cursor: pointer;
         }
 
         .table_component {
@@ -125,10 +176,10 @@ require '../vendor/autoload.php';
 <nav>
     <ul>
         <li>
-            <a href="index.php">Главная страница</a>
+            <a href="./index.php">Главная страница</a>
         </li>
         <li>
-            <a href="report.php">Отчеты</a>
+            <a href="./report.php">Отчеты</a>
         </li>
     </ul>
 </nav>

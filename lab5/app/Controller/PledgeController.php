@@ -18,13 +18,25 @@ class PledgeController
         )->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function get($id)
+    {
+        $database = Database::getInstance();
+
+        return $database->connection->query(
+            "SELECT pledges.*, client.full_name AS client_full_name, expert.full_name AS expert_full_name FROM pledges
+            LEFT JOIN lab5.clients AS client ON client.id = pledges.client_id
+            LEFT JOIN lab5.experts AS expert ON expert.id = pledges.expert_id
+            WHERE pledges.id = '{$id}';"
+        )->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function save($data)
     {
         if ($this->validate($data)) {
             $database = Database::getInstance();
 
             return $database->connection->query(
-                "INSERT INTO pledges (name, price, start_date, over_date, client_id, expert_id) 
+                "INSERT INTO pledges (name, price, start_date, over_date, client_id, expert_id)
                 VALUES ('{$data['name']}','{$data['price']}','{$data['start_date']}','{$data['over_date']}','{$data['client_id']}','{$data['expert_id']}');"
             );
         }
@@ -61,6 +73,7 @@ class PledgeController
 
     private function validate($data)
     {
+        var_dump($data);
         return true;
     }
 }
