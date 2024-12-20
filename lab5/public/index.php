@@ -2,6 +2,8 @@
 
 require 'templates/header.php';
 
+(new \Labs\Lab5\Controller\MainController())->checkRequest($_REQUEST);
+
 echo '<pre>';
 $pledgesList = (new \Labs\Lab5\Controller\PledgeController())->index();
 $expertsList = (new \Labs\Lab5\Controller\ExpertController())->index();
@@ -23,23 +25,28 @@ echo '</pre>';
                 <th>Дата начала</th>
                 <th>Дата окончания</th>
             </tr>
-           <?php
-                foreach ($pledgesList as $pledge) : ?>
-                    <tr>
-                        <td><?= $pledge['name'] ?></td>
-                        <td><?= $pledge['price'] ?></td>
-                        <td><?= $pledge['full_name'] ?></td>
-                        <td><?= $pledge['expert_full_name'] ?></td>
-                        <td><?= $pledge['start_date'] ?></td>
-                        <td><?= $pledge['over_date'] ?></td>
-                        <td style="border: none; text-align: left">
-                            <button class="update">Редактировать</button>
-                            <button class="delete">Удалить</button>
-                        </td>
-                    </tr>
-                <?php
-                endforeach; ?>
-            </table>
+            <?php
+            foreach ($pledgesList as $pledge) : ?>
+                <tr>
+                    <td><?= $pledge['name'] ?></td>
+                    <td><?= $pledge['price'] ?></td>
+                    <td><?= $pledge['client_full_name'] ?></td>
+                    <td><?= $pledge['expert_full_name'] ?></td>
+                    <td><?= $pledge['start_date'] ?></td>
+                    <td><?= $pledge['over_date'] ?></td>
+                    <form action="forms/update.php" method="GET" id="update_pledge""></form>
+                    <form action="/" method="POST" id="delete_pledge""></form>
+                    <td style="border: none; text-align: left">
+                        <button class="update" form="update_pledge" name="update_pledge" value="<?= $pledge['id']?>">Редактировать</button>
+                        <button class="delete" form="delete_pledge"  name="delete_pledge" value="<?= $pledge['id']?>"> Удалить</button>
+                    </td>
+                </tr>
+            <?php
+            endforeach; ?>
+            <td style="border: none; text-align: left">
+                <button class="create">Добавить</button>
+            </td>
+        </table>
     </div>
 
     <div class="table_component" role="region" tabindex="0">
@@ -50,20 +57,25 @@ echo '</pre>';
                 <th>Номер телефона</th>
                 <th>Дата трудоустройства</th>
             </tr>
-           <?php
-                foreach ($expertsList as $pledge) : ?>
-                    <tr>
-                        <td><?= $pledge['full_name'] ?></td>
-                        <td><?= $pledge['phone'] ?></td>
-                        <td><?= $pledge['hiring_date'] ?></td>
-                        <td style="border: none; text-align: left">
-                            <button class="update">Редактировать</button>
-                            <button class="delete">Удалить</button>
-                        </td>
-                    </tr>
-                <?php
-                endforeach; ?>
-            </table>
+            <?php
+            foreach ($expertsList as $expert) : ?>
+                <tr>
+                    <td><?= $expert['full_name'] ?></td>
+                    <td><?= $expert['phone'] ?></td>
+                    <td><?= $expert['hiring_date'] ?></td>
+                    <form action="forms/update.php" method="GET" id="update_expert""></form>
+                    <form action="/" method="POST" id="delete_expert""></form>
+                    <td style="border: none; text-align: left">
+                        <button class="update" form="update_expert" name="update_expert" value="<?= $expert['id']?>">Редактировать</button>
+                        <button class="delete" form="delete_expert"  name="delete_expert" value="<?= $expert['id']?>"> Удалить</button>
+                    </td>
+                </tr>
+            <?php
+            endforeach; ?>
+            <td style="border: none; text-align: left">
+                <button class="create">Добавить</button>
+            </td>
+        </table>
     </div>
 
     <div class="table_component" role="region" tabindex="0">
@@ -74,20 +86,25 @@ echo '</pre>';
                 <th>Номер телефона</th>
                 <th>Номер паспорта</th>
             </tr>
-           <?php
-                foreach ($clientsList as $pledge) : ?>
-                    <tr>
-                        <td><?= $pledge['full_name'] ?></td>
-                        <td><?= $pledge['phone'] ?></td>
-                        <td><?= $pledge['passport_number'] ?></td>
-                        <td style="border: none; text-align: left">
-                            <button class="update">Редактировать</button>
-                            <button class="delete">Удалить</button>
-                        </td>
-                    </tr>
-                <?php
-                endforeach; ?>
-            </table>
+            <?php
+            foreach ($clientsList as $client) : ?>
+                <tr>
+                    <td><?= $client['full_name'] ?></td>
+                    <td><?= $client['phone'] ?></td>
+                    <td><?= $client['passport_number'] ?></td>
+                    <form action="forms/update.php" method="GET" id="update_client""></form>
+                    <form action="/" method="POST" id="delete_client""></form>
+                    <td style="border: none; text-align: left">
+                        <button class="update" form="update_client" name="update_client" value="<?= $client['id']?>">Редактировать</button>
+                        <button class="delete" form="delete_client"  name="delete_client" value="<?= $client['id']?>"> Удалить</button>
+                    </td>
+                </tr>
+            <?php
+            endforeach; ?>
+            <td style="border: none; text-align: left">
+                <button class="create">Добавить</button>
+            </td>
+        </table>
     </div>
 <?php
 require 'templates/footer.php';

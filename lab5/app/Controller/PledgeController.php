@@ -12,7 +12,7 @@ class PledgeController
         $database = Database::getInstance();
 
         return $database->connection->query(
-            'SELECT pledges.*, client.*, expert.full_name AS expert_full_name, expert.phone AS expert_phone FROM pledges
+            'SELECT pledges.*, client.full_name AS client_full_name, expert.full_name AS expert_full_name FROM pledges
             LEFT JOIN lab5.clients AS client ON client.id = pledges.client_id
             LEFT JOIN lab5.experts AS expert ON expert.id = pledges.expert_id'
         )->fetchAll(PDO::FETCH_ASSOC);
@@ -56,7 +56,7 @@ class PledgeController
     {
         $database = Database::getInstance();
 
-        return $database->connection->query("DELETE FROM pleges WHERE id = '$id';")->fetch();
+        return $database->connection->query("DELETE FROM pledges WHERE id = '{$id}';")->fetch();
     }
 
     private function validate($data)

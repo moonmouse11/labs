@@ -31,9 +31,11 @@ require '../vendor/autoload.php';
 
         .table_component {
             overflow: auto;
-            width: 100%;
+            width: 80%;
             place-items: center;
             margin-bottom: 50px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .table_component table {
@@ -100,13 +102,15 @@ require '../vendor/autoload.php';
         }
 
         #Client, #Expert {
-            background-position: 10px 12px; /* Расположите значок поиска */
-            background-repeat: no-repeat; /* Не повторяйте изображение значка */
-            width: 100%; /* Полная ширина */
-            font-size: 16px; /* Увеличить размер шрифта */
-            padding: 12px 20px 12px 40px; /* Добавить немного отступов */
-            border: 1px solid #ddd; /* Добавить серую границу */
-            margin-bottom: 12px; /* Добавить некоторое пространство под входом */
+            position: unset;
+            list-style: none;
+            width: 30%;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
         }
 
         #Pledges, #Clients, #Experts {

@@ -46,10 +46,10 @@ create table pledges(
     price decimal not null,
     start_date date not null,
     over_date date,
-    client_id int not null,
-    expert_id int not null,
-    foreign key (client_id) references clients(id) on delete no action,
-    foreign key (expert_id) references experts(id) on delete no action 
+    client_id int,
+    expert_id int,
+    foreign key (client_id) references clients(id) on delete set null,
+    foreign key (expert_id) references experts(id) on delete set null 
 );
 ```
 
