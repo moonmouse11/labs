@@ -12,11 +12,11 @@ if (array_key_exists('create_pledge', $request) || array_key_exists('update_pled
     } ?>
     <form class="form_component" action="index.php" method="POST" id="pledge_form">
         <label for="name">Название залога</label>
-        <input type="text" id="name" name="name" value="<?= $pledge['name'] ?? '' ?>">
+        <input type="text" id="name" name="name" required value="<?= $pledge['name'] ?? '' ?>">
         <label for="price">Цена залога</label>
-        <input type="number" id="price" name="price" value="<?= $pledge['price'] ?? '' ?>">
+        <input type="number" id="price" name="price" required value="<?= $pledge['price'] ?? '' ?>">
         <label for="client_id">Клиент
-            <select name="client_id">
+            <select required name="client_id">
                 <?php
                 foreach ($clients as $client) : ?>
                     <option value="<?= $client['id'] ?>"><?= $client['full_name'] ?></option>
@@ -26,7 +26,7 @@ if (array_key_exists('create_pledge', $request) || array_key_exists('update_pled
         </label>
         <label for="expert_id">Оценщик</label>
         <label>
-            <select name="expert_id">
+            <select required name="expert_id">
                 <?php
                 foreach ($experts as $expert) : ?>
                     <option value="<?= $expert['id'] ?>"><?= $expert['full_name'] ?></option>
@@ -35,7 +35,7 @@ if (array_key_exists('create_pledge', $request) || array_key_exists('update_pled
             </select>
         </label>
         <label for="start_date">Дата начала залога</label>
-        <input type="date" id="start_date" name="start_date" value="<?= $pledge['start_date'] ?? '' ?>">
+        <input type="date" id="start_date" required name="start_date" value="<?= $pledge['start_date'] ?? '' ?>">
         <label for="over_date">Дата окончания залога</label>
         <input type="date" id="over_date" name="over_date" value="<?= $pledge['over_date'] ?? '' ?>">
         <?php
@@ -57,11 +57,11 @@ if (array_key_exists('create_expert', $request) || array_key_exists('update_expe
     } ?>
     <form class="form_component" action="index.php" method="POST" id="expert_form">
         <label for="full_name">Имя эксперта</label>
-        <input type="text" id="full_name" name="full_name" value="<?= $expert['full_name'] ?? '' ?>">
+        <input type="text" id="full_name" required name="full_name" value="<?= $expert['full_name'] ?? '' ?>">
         <label for="phone">Номер телефона эксперта</label>
-        <input type="tel" id="phone" name="phone" value="<?= $expert['phone'] ?? '' ?>">
+        <input type="tel" id="phone" name="phone" required value="<?= $expert['phone'] ?? '' ?>">
         <label for="hiring_date">Дата приема на работу</label>
-        <input type="date" id="hiring_date" name="hiring_date" value="<?= $expert['hiring_date'] ?? '' ?>">
+        <input type="date" id="hiring_date" required name="hiring_date" value="<?= $expert['hiring_date'] ?? '' ?>">
         <?php
         if (isset($expert)) : ?>
             <button class="update" form="expert_form" name="expert_update_id" value="<?= $expert['id'] ?>">Обновить
@@ -82,11 +82,11 @@ if (array_key_exists('create_client', $request) || array_key_exists('update_clie
     } ?>
     <form class="form_component" action="index.php" method="POST" id="client_form">
         <label for="full_name">Имя клиента</label>
-        <input type="text" id="full_name" name="full_name" value="<?= $client['full_name'] ?? '' ?>">
+        <input type="text" id="full_name" required name="full_name" value="<?= $client['full_name'] ?? '' ?>">
         <label for="phone">Номер телефона клиента</label>
-        <input type="tel" id="phone" name="phone" value="<?= $client['phone'] ?? '' ?>">
+        <input type="tel" id="phone" required name="phone" value="<?= $client['phone'] ?? '' ?>">
         <label for="passport_name">Паспортные данные клиента</label>
-        <input type="text" pattern="[0-9 ]+" id="passport_number" name="passport_number"
+        <input type="text" pattern="[0-9 ]+" id="passport_number" required name="passport_number"
                value="<?= $client['passport_number'] ?? '' ?>">
         <?php
         if (isset($client)) : ?>

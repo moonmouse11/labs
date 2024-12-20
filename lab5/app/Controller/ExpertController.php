@@ -28,33 +28,38 @@ class ExpertController
 
     public function save($data)
     {
-        if($this->validate($data)) {
-            $database = Database::getInstance();
+        $database = Database::getInstance();
 
-            return $database->connection->query(
-                "INSERT INTO experts (full_name, phone, hiring_date)
-                VALUES ('{$data['full_name']}','{$data['phone']}','{$data['hiring_date']}');"
-            )->fetch();
-        }
+        $statement = $database->connection->prepare(
+            "INSERT INTO experts (full_name, phone, hiring_date)
+                VALUES  (:full_name, :phone, :hiring_date);"
+        );
 
-        return false;
+        return $statement->execute([
+            ':full_name' => $data['full_name'],
+            ':phone' => $data['phone'],
+            ':hiring_date' => $data['hiring_date'],
+        ]);
     }
 
     public function update($id, $data)
     {
-        if ($this->validate($data)) {
-            $database = Database::getInstance();
+        $database = Database::getInstance();
 
-            return $database->connection->query(
-                "UPDATE experts SET
-                   full_name = '{$data['full_name']}',
-                   phone = '{$data['phone']}',
-                   hiring_date = '{$data['hiring_date']}'
-                WHERE id = '{$id}';"
-            )->fetch();
-        }
+        $statement = $database->connection->prepare(
+            "UPDATE experts SET
+                   full_name = :full_name,
+                   phone = :phone,
+                   hiring_date = :hiring_date
+                WHERE id = :id;"
+        );
 
-        return false;
+        return $statement->execute([
+            ':full_name' => $data['full_name'],
+            ':phone' => $data['phone'],
+            ':hiring_date' => $data['hiring_date'],
+            ':id' => $id
+        ]);
     }
 
     public function delete($id)
@@ -66,8 +71,4 @@ class ExpertController
         )->fetch();
     }
 
-    private function validate($data)
-    {
-        return true;
-    }
 }

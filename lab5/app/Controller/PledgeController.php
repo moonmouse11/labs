@@ -32,36 +32,47 @@ class PledgeController
 
     public function save($data)
     {
-        if ($this->validate($data)) {
-            $database = Database::getInstance();
+        $database = Database::getInstance();
 
-            return $database->connection->query(
-                "INSERT INTO pledges (name, price, start_date, over_date, client_id, expert_id)
-                VALUES ('{$data['name']}','{$data['price']}','{$data['start_date']}','{$data['over_date']}','{$data['client_id']}','{$data['expert_id']}');"
-            );
-        }
+        $statement = $database->connection->prepare(
+            "INSERT INTO pledges (name, price, start_date, over_date, client_id, expert_id)
+                VALUES  (:name, :price, :start_date, :over_date, :client_id, :expert_id)"
+        );
 
-        return false;
+        return $statement->execute([
+            ':name' => $data['name'],
+            ':price' => $data['price'],
+            ':start_date' => $data['start_date'],
+            ':over_date' => empty($data['over_date']) ? null : $data['over_date'],
+            ':client_id' => $data['client_id'],
+            ':expert_id' => $data['expert_id']
+        ]);
     }
 
     public function update($id, $data)
     {
-        if ($this->validate($data)) {
-            $database = Database::getInstance();
+        $database = Database::getInstance();
 
-            return $database->connection->query(
-                "UPDATE pledges SET
-                    name = '{$data['name']}',
-                    price = '{$data['price']}',
-                    start_date = '{$data['start_date']}',
-                    over_date = '{$data['over_date']}',
-                    client_id = '{$data['client_id']}',
-                    expert_id = '{$data['expert_id']}'
-                WHERE id = '{$id}';"
-            );
-        }
+        $statement = $database->connection->prepare(
+             "UPDATE pledges SET
+                   name = :name,
+                   price = :price,
+                   start_date = :start_date,
+                   over_date = :over_date,
+                   client_id = :client_id,
+                   expert_id = :expert_id
+                WHERE id = :id;"
+        );
 
-        return false;
+        return $statement->execute([
+            ':name' => $data['name'],
+            ':price' => $data['price'],
+            ':start_date' => $data['start_date'],
+            ':over_date' => empty($data['over_date']) ? null : $data['over_date'],
+            ':client_id' => $data['client_id'],
+            ':expert_id' => $data['expert_id'],
+            ':id' => $id,
+        ]);
     }
 
     public function delete($id)
@@ -71,9 +82,4 @@ class PledgeController
         return $database->connection->query("DELETE FROM pledges WHERE id = '{$id}';")->fetch();
     }
 
-    private function validate($data)
-    {
-        var_dump($data);
-        return true;
-    }
 }

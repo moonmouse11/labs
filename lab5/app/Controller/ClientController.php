@@ -23,33 +23,38 @@ class ClientController
 
     public function save($data)
     {
-        if ($this->validate($data)) {
-            $database = Database::getInstance();
+        $database = Database::getInstance();
 
-            return $database->connection->query(
-                "INSERT INTO clients (full_name, phone, passport_number)
-                VALUES ('{$data['full_name']}','{$data['phone']}','{$data['passport_number']}');"
-            )->fetch();
-        }
+        $statement = $database->connection->prepare(
+            "INSERT INTO clients (full_name, phone, passport_number)
+                VALUES  (:full_name, :phone, :passport_number);"
+        );
 
-        return false;
+        return $statement->execute([
+            ':full_name' => $data['full_name'],
+            ':phone' => $data['phone'],
+            ':passport_number' => $data['passport_number'],
+        ]);
     }
 
     public function update($id, $data)
     {
-        if ($this->validate($data)) {
-            $database = Database::getInstance();
+        $database = Database::getInstance();
 
-            return $database->connection->query(
-                "UPDATE clients SET
-                   full_name = '{$data['full_name']}',
-                   phone = '{$data['phone']}',
-                   passport_number = '{$data['passport_number']}'
-                WHERE id = '{$id}';"
-            )->fetch();
-        }
+        $statement = $database->connection->prepare(
+            "UPDATE clients SET
+                   full_name = :full_name,
+                   phone = :phone,
+                   passport_number = :passport_number
+                WHERE id = :id;"
+        );
 
-        return false;
+        return $statement->execute([
+            ':full_name' => $data['full_name'],
+            ':phone' => $data['phone'],
+            ':passport_number' => $data['passport_number'],
+            ':id' => $id
+        ]);
     }
 
     public function delete($id)
@@ -59,8 +64,4 @@ class ClientController
         return $database->connection->query("DELETE FROM clients WHERE id = '$id';")->fetch();
     }
 
-    private function validate($data)
-    {
-        return true;
-    }
 }
