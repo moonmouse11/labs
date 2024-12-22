@@ -9,6 +9,7 @@ $expertsList = (new \Labs\Lab5\Controller\ExpertController())->index();
 $clientsList = (new \Labs\Lab5\Controller\ClientController())->index();
 
 ?>
+    <h1>Главная страница</h1>
     <input type="text" id="Client" onkeyup="clientFilter()" placeholder="Поиск клиента">
     <input type="text" id="Expert" onkeyup="expertFilter()" placeholder="Поиск эксперта">
     <div class="table_component" role="region" tabindex="0">

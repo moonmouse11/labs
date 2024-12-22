@@ -7,6 +7,9 @@ require __DIR__ . '/../../vendor/autoload.php';
 <head>
     <title>Залоги ломбард</title>
     <style>
+        h1 {
+            text-align: center;
+        }
         nav {
             text-align: center;
         }
