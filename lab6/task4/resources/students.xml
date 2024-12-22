@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<students>
+    <student id="1">
+        <name>Иван Иванов</name>
+        <faculty>Теплофизика</faculty>
+    </student>
+    <student id="2">
+        <name>Мария Смирнова</name>
+        <faculty>Мехатроника</faculty>
+    </student>
+</students>

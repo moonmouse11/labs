@@ -5,5 +5,7 @@
             "Labs\\Lab4\\": "app/"
         }
     },
-    "require": {}
+    "require": {
+      "ext-pdo": "*"
+    }
 }

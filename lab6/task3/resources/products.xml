@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<products>
+    <product id="1" name="Ноутбук Acer Aspire 500" price="100000"/>
+    <product id="2" name="Смартфон Samsung Galaxy S24" price="50000"/>
+</products>
