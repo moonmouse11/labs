@@ -10,4 +10,14 @@
         <author>Jane Doe</author>
         <price>19.99</price>
     </book>
+    <book>
+        <title>SQL For Dummies</title>
+        <author>Mike Smith</author>
+        <price>59.99</price>
+    </book>
+    <book>
+        <title>HTML Fundamentals</title>
+        <author>Cool Guy</author>
+        <price>199.99</price>
+    </book>
 </library>

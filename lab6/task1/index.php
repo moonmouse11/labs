@@ -15,13 +15,14 @@ $movies = checkXMLFile();
 <head>
     <title>XML task 1</title>
 </head>
-<body>
-
+<body
+<div>
 <form action="/" method="post" enctype="multipart/form-data">
     Select XML to upload:
     <input type="file" name="fileToUpload" id="fileToUpload">
     <input type="submit" value="Upload XML" name="submit">
 </form>
+</div>
 <div>
     <table>
         <caption>Список фильмов</caption>
