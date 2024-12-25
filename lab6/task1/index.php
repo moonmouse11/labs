@@ -16,7 +16,7 @@ $movies = checkXMLFile();
     <title>XML task 1</title>
 </head>
 <body>
-<div>
+<div style="margin-bottom: 40px">
 <form action="/" method="post" enctype="multipart/form-data">
     Select XML to upload:
     <input type="file" name="fileToUpload" id="fileToUpload">
@@ -32,9 +32,9 @@ $movies = checkXMLFile();
             <th>Год выпуска</th>
             <th>Жанр</th>
         </tr>
-        <tr>
         <?php
         foreach ($movies->children() as $movie) : ?>
+        <tr>
             <form action="/" method="POST" id="update_record_<?= $index ?>">
             <td><input type="text" id="title" required name="title" value="<?= $movie->title ?>"></td>
             <td><input type="text" id="director" required name="director" value="<?= $movie->director ?>"></td>
@@ -50,7 +50,7 @@ $movies = checkXMLFile();
                     Удалить
                 </button>
             </td>
-            </tr>
+        </tr>
         <?php
         $index++;
         endforeach; ?>

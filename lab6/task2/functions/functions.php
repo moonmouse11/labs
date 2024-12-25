@@ -5,8 +5,7 @@ const TEMP_UPLOAD_FOLDER = __DIR__ . '/../resources/uploads/';
 
 function handleRequest($request)
 {
-
-
+    var_dump($request);
 }
 
 function checkXMLFile()
@@ -16,14 +15,14 @@ function checkXMLFile()
     if (!empty($_FILES['fileToUpload']['tmp_name'])) {
         /* Подгрузка пользовательского XML */
         copy($_FILES['fileToUpload']['tmp_name'], TEMP_UPLOAD_FOLDER . $_FILES['fileToUpload']['name']);
-        $domDocument->loadXML($_FILES['fileToUpload']['tmp_name']);
+        $domDocument->load($_FILES['fileToUpload']['tmp_name']);
     } elseif (checkTempFiles()) {
         /* Подгрузка ранее загруженного пользовательского XML */
-        $domDocument->loadXML(getLatestUploadedFile());
+        $domDocument->load(getLatestUploadedFile());
     } else {
         /* Подгрузка исходного XML */
         copy(MAIN_XML_FILE, TEMP_UPLOAD_FOLDER . 'default.xml');
-        $domDocument->loadXML(MAIN_XML_FILE);
+        $domDocument->load(MAIN_XML_FILE);
     }
 
     return $domDocument;
