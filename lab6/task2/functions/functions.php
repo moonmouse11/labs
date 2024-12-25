@@ -16,14 +16,14 @@ function checkXMLFile()
     if (!empty($_FILES['fileToUpload']['tmp_name'])) {
         /* Подгрузка пользовательского XML */
         copy($_FILES['fileToUpload']['tmp_name'], TEMP_UPLOAD_FOLDER . $_FILES['fileToUpload']['name']);
-        $domDocument->load($_FILES['fileToUpload']['tmp_name']);
+        $domDocument->loadXML($_FILES['fileToUpload']['tmp_name']);
     } elseif (checkTempFiles()) {
         /* Подгрузка ранее загруженного пользовательского XML */
-        $domDocument->load(getLatestUploadedFile());
+        $domDocument->loadXML(getLatestUploadedFile());
     } else {
         /* Подгрузка исходного XML */
         copy(MAIN_XML_FILE, TEMP_UPLOAD_FOLDER . 'default.xml');
-        $domDocument->load(MAIN_XML_FILE);
+        $domDocument->loadXML(MAIN_XML_FILE);
     }
 
     return $domDocument;

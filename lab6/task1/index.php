@@ -15,7 +15,7 @@ $movies = checkXMLFile();
 <head>
     <title>XML task 1</title>
 </head>
-<body
+<body>
 <div>
 <form action="/" method="post" enctype="multipart/form-data">
     Select XML to upload:
@@ -32,6 +32,7 @@ $movies = checkXMLFile();
             <th>Год выпуска</th>
             <th>Жанр</th>
         </tr>
+        <tr>
         <?php
         foreach ($movies->children() as $movie) : ?>
             <form action="/" method="POST" id="update_record_<?= $index ?>">
@@ -40,7 +41,7 @@ $movies = checkXMLFile();
             <td><input type="number" id="year" required name="year" value="<?= $movie->year ?>"></td>
             <td><input type="text" id="genre" required name="genre" value="<?= $movie->genre ?>"></td>
             </form>
-            <form action="/" method="POST" id="delete_record""></form>
+            <form action="/" method="POST" id="delete_record"></form>
             <td style="border: none; text-align: left">
                 <button class="update" form="update_record_<?= $index ?>" name="update_xml_record" value="<?= $movie->asXML() ?>">
                     Редактировать
