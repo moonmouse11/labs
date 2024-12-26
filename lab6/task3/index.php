@@ -40,20 +40,19 @@ $index = 1;
                 foreach ($product->attributes() as $title => $name) : ?>
                     <tr>
                         <form action="/" method="POST" id="update_attribute_<?= $index . '_' . $title ?>">
-                            <td><input type="text" id="<?= $title ?>" required name="<?= $title ?>"
-                                       value="<?= $title ?>"></td>
-                            <td><input type="text" id="<?= $name ?>" required name="<?= $name ?>" value="<?= $name ?>">
-                            </td>
+                            <td><input type="text" id="<?= $title ?>" required name="attribute_name" value="<?= $title ?>"></td>
+                            <td><input type="text" id="<?= $name ?>" required name="attribute_value" value="<?= $name ?>"></td>
+                            <input type="hidden" name="attribute_name_old" value="<?= $title ?>">
                         </form>
-
-                        <form action="/" method="POST" id="delete_attribute_<?= $index . '_' . $title ?>"></form>
+                        <form action="/" method="POST" id="delete_attribute_<?= $index . '_' . $title ?>">
+                        <input type="hidden" name="attribute_name" value="<?= $title ?>"></form>
                         <td style="border: none; text-align: left">
                             <button form="update_attribute_<?= $index . '_' . $title ?>" name="update_attribute"
                                     value="<?= $index ?>">
                                 Изменить
                             </button>
                             <button form="delete_attribute_<?= $index . '_' . $title ?>" name="delete_attribute"
-                                    value="<?= $index . '_' . $title ?>">
+                                    value="<?= $index ?>">
                                 Удалить
                             </button>
                         </td>

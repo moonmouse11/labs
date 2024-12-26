@@ -5,7 +5,16 @@ const TEMP_UPLOAD_FOLDER = __DIR__ . '/../resources/uploads/';
 
 function handleRequest($request)
 {
-    var_dump($request);
+    if (array_key_exists('delete_attribute', $request)) {
+        deleteAttribute($request['attribute_name'], $request['delete_attribute']);
+    }
+    if (array_key_exists('update_attribute', $request)) {
+        updateAttribute($request, $request['attribute_name_old'], $request['update_attribute']);
+    }
+
+    if (array_key_exists('create_attribute', $request)) {
+        createAttribute($request, $request['record_id']);
+    }
 }
 
 function checkXMLFile()
@@ -60,51 +69,34 @@ function getLatestUploadedFile()
     return $tempFile;
 }
 
-function createRecord($record)
+function createAttribute($attribute, $recordId)
 {
-    $domDocument = checkXMLFile();
 
-    $bookNode = $domDocument->createElement('book');
-
-    foreach ($record as $title => $value){
-        if ($title === 'create_record') {
-            continue;
-        }
-        $titleNode = $domDocument->createElement($title);
-        $valueNode = $domDocument->createTextNode($value);
-        $titleNode->appendChild($valueNode);
-        $bookNode->appendChild($titleNode);
-    }
-
-    $domDocument->documentElement->appendChild($bookNode);
-
-    $domDocument->save(getLatestUploadedFile());
 
 }
 
-function updateRecord($recordId, $record)
+function updateAttribute($attribute, $oldAttrubute, $recordId)
 {
-    $domDocument = checkXMLFile();
 
-    $bookNode = $domDocument->getElementsByTagName('book')->item($recordId - 1);
-
-    foreach ($record as $title => $value){
-        if ($title === 'update_record') {
-            continue;
-        }
-        $bookNode->getElementsByTagName($title)->item(0)->nodeValue = $value;
-    }
-
-    $domDocument->save(getLatestUploadedFile());
 }
 
-function deleteRecord($recordId)
+function deleteAttribute($attributeTitle, $reecordId)
 {
-    $domDocument = checkXMLFile();
+    $products = checkXMLFile();
 
-    $deletedElement = $domDocument->getElementsByTagName('book')->item($recordId - 1);
+    $record = simplexml_load_string($record);
 
-    $deletedElement->remove();
+    $count = 0;
 
-    $domDocument->save(getLatestUploadedFile());
+    foreach ($movies->children() as $movie) {
+        if (compareXml($movie, $record)) {
+            break;
+        }
+
+        $count++;
+    }
+    unset($movies->movie[$count]);
+
+    file_put_contents(getLatestUploadedFile(), $movies->asXML());
+
 }
