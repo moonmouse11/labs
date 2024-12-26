@@ -6,9 +6,6 @@ handleRequest($_POST);
 
 $products = checkXMLFile();
 
-var_dump($products);
-
-$attributes = [];
 $index = 1;
 ?>
 
@@ -26,34 +23,57 @@ $index = 1;
     </form>
 </div>
 <div>
-    <table>
-        <thead>
-        <caption>Список товаров</caption>
-        <tr class="header">
-            <?php
-            foreach ($products->children() as $product) :
-                foreach ($product->attributes() as $title => $name) :
-                    $elementsArray[] = $name; ?>
-                    <th><?= $title . ' ' . $name ?></th>
+    <h2>Список товаров</h2>
+</div>
+<div>
+    <?php
+    foreach ($products->children() as $product) : ?>
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <td>Attribute Name</td>
+                    <td>Attribute Value</td>
+                </tr>
+                </thead>
                 <?php
-                endforeach;
-            endforeach; ?>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <form action="/" method="POST" id="create_attribute">
-                <?php
-                foreach ($attributes as $attribute) : ?>
-                    <td><input type="text" id="<?= $attribute ?>" required name="<?= $attribute ?>" value=""></td>
+                foreach ($product->attributes() as $title => $name) : ?>
+                    <tr>
+                        <form action="/" method="POST" id="update_attribute_<?= $index . '_' . $title ?>">
+                            <td><input type="text" id="<?= $title ?>" required name="<?= $title ?>"
+                                       value="<?= $title ?>"></td>
+                            <td><input type="text" id="<?= $name ?>" required name="<?= $name ?>" value="<?= $name ?>">
+                            </td>
+                        </form>
+
+                        <form action="/" method="POST" id="delete_attribute_<?= $index . '_' . $title ?>"></form>
+                        <td style="border: none; text-align: left">
+                            <button form="update_attribute_<?= $index . '_' . $title ?>" name="update_attribute"
+                                    value="<?= $index ?>">
+                                Изменить
+                            </button>
+                            <button form="delete_attribute_<?= $index . '_' . $title ?>" name="delete_attribute"
+                                    value="<?= $index . '_' . $title ?>">
+                                Удалить
+                            </button>
+                        </td>
+                    </tr>
                 <?php
                 endforeach; ?>
-                <input type="hidden" name="create_attribute">
-                <td><input type="submit" name="create_attribute" value="Добавить"></td>
-            </form>
-        </tr>
-        </tbody>
-    </table>
+
+                <tr>
+                    <form action="/" method="POST" id="create_attribute_<?= $index ?>">
+                        <td><input type="text" id="attribute_name" required name="attribute_name" value=""></td>
+                        <td><input type="text" id="attribute_value" required name="attribute_value" value=""></td>
+                        <input type="hidden" name="record_id" value="<?= $index ?>">
+                        <td><input type="submit" name="create_attribute" value="Добавить"></td>
+                    </form>
+                </tr>
+            </table>
+        </div>
+        <?php
+        $index++;
+    endforeach; ?>
 </div>
 </body>
 </html>

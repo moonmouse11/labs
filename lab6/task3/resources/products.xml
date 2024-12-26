@@ -3,5 +3,5 @@
     <product id="1" name="Ноутбук Acer Aspire 500" price="100000"/>
     <product id="2" name="Смартфон Samsung Galaxy S24" price="50000"/>
     <product id="3" name="Смартфон Apple 15" price="500000"/>
-    <product id="4" name="Флешка SunDisk" price="500"/>
+    <product id="4" name="Флешка SunDisk" price="500" qty="10"/>
 </products>
