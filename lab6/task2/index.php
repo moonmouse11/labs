@@ -47,18 +47,23 @@ $index = 1;
                             <td><input type="text" id="<?= $element ?>" required name="<?= $element ?>" value="<?= $book->getElementsByTagName($element)->item(0)->nodeValue ?>"></td>
                         <?php endforeach; ?>
                 </form>
-                <form action="/" method="POST" id="delete_record"></form>
+                <form action="/" method="POST" id="delete_record_<?= $index ?>"></form>
                     <td style="border: none; text-align: left">
-                        <button class="update" form="update_record_<?= $index ?>" name="update_xml_record" value="">Редактировать</button>
-                        <button class="delete" form="delete_record" name="delete_xml_record" value="<?= $index ?>">Удалить</button>
+                        <button form="update_record_<?= $index ?>" name="update_record" value="<?= $index ?>">Редактировать</button>
+                        <button form="delete_record_<?= $index ?>" name="delete_record" value="<?= $index ?>">Удалить</button>
                     </td>
                     <?php $index++; endif; ?>
             </tr>
         <?php endforeach; ?>
-            <form action="form.php" method="POST" id="create_record"></form>
-            <td style="border: none; text-align: left">
-                <button class="create" form="create_record" name="create_record">Добавить</button>
-            </td>
+            <tr>
+                <form action="/" method="POST" id="create_record">
+                <?php foreach ($elementsArray as $element) : ?>
+                    <td><input type="text" id="<?= $element ?>" required name="<?= $element ?>" value=""></td>
+                <?php endforeach; ?>
+                    <input type="hidden" name="create_record">
+                <td><input type="submit" name="create_record" value="Добавить"></td>
+                </form>
+            </tr>
     </table>
 </div>
 </body>

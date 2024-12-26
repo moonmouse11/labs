@@ -5,7 +5,16 @@ const TEMP_UPLOAD_FOLDER = __DIR__ . '/../resources/uploads/';
 
 function handleRequest($request)
 {
-    var_dump($request);
+    if (array_key_exists('delete_record', $request)) {
+        deleteRecord($request['delete_record']);
+    }
+    if (array_key_exists('update_record', $request)) {
+        updateRecord($request['update_record'], $request);
+    }
+
+    if (array_key_exists('create_record', $request)) {
+        createRecord($request);
+    }
 }
 
 function checkXMLFile()
@@ -60,4 +69,53 @@ function getLatestUploadedFile()
     }
 
     return $tempFile;
+}
+
+function createRecord($record)
+{
+    $domDocument = checkXMLFile();
+
+    $bookNode = $domDocument->createElement('book');
+
+    foreach ($record as $title => $value){
+        if ($title === 'create_record') {
+            continue;
+        }
+        $titleNode = $domDocument->createElement($title);
+        $valueNode = $domDocument->createTextNode($value);
+        $titleNode->appendChild($valueNode);
+        $bookNode->appendChild($titleNode);
+    }
+
+    $domDocument->documentElement->appendChild($bookNode);
+
+    $domDocument->save(getLatestUploadedFile());
+
+}
+
+function updateRecord($recordId, $record)
+{
+    $domDocument = checkXMLFile();
+
+    $bookNode = $domDocument->getElementsByTagName('book')->item($recordId - 1);
+
+    foreach ($record as $title => $value){
+        if ($title === 'update_record') {
+            continue;
+        }
+        $bookNode->getElementsByTagName($title)->item(0)->nodeValue = $value;
+    }
+
+    $domDocument->save(getLatestUploadedFile());
+}
+
+function deleteRecord($recordId)
+{
+    $domDocument = checkXMLFile();
+
+    $deletedElement = $domDocument->getElementsByTagName('book')->item($recordId - 1);
+
+    $deletedElement->remove();
+
+    $domDocument->save(getLatestUploadedFile());
 }

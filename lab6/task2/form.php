@@ -9,3 +9,15 @@ $booksDOM = checkXMLFile();
 $elementsArray = [];
 
 echo "Fuck";
+?>
+
+<!DOCTYPE html>
+<html lang="ru/RU">
+<head>
+    <title>XML task 2 Add Element</title>
+</head>
+<body>
+
+
+</body>
+</html>
