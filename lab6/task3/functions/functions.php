@@ -71,32 +71,42 @@ function getLatestUploadedFile()
 
 function createAttribute($attribute, $recordId)
 {
+    $products = checkXMLFile();
 
+    $product = $products->children()[$recordId - 1];
+
+    $product->addAttribute($attribute['attribute_name'], $attribute['attribute_value']);
+
+    file_put_contents(getLatestUploadedFile(), $products->asXML());
 
 }
 
-function updateAttribute($attribute, $oldAttrubute, $recordId)
-{
-
-}
-
-function deleteAttribute($attributeTitle, $reecordId)
+function updateAttribute($newAttribute, $oldAttrubute, $recordId)
 {
     $products = checkXMLFile();
 
-    $record = simplexml_load_string($record);
+    $product = $products->children()[$recordId - 1];
 
-    $count = 0;
+    $attributes = $product->attributes();
 
-    foreach ($movies->children() as $movie) {
-        if (compareXml($movie, $record)) {
-            break;
-        }
+    unset($attributes[$oldAttrubute]);
 
-        $count++;
-    }
-    unset($movies->movie[$count]);
+    $product->addAttribute($newAttribute['attribute_name'], $newAttribute['attribute_value']);
 
-    file_put_contents(getLatestUploadedFile(), $movies->asXML());
+    file_put_contents(getLatestUploadedFile(), $products->asXML());
+
+}
+
+function deleteAttribute($attributeTitle, $recordId)
+{
+    $products = checkXMLFile();
+
+    $product = $products->children()[$recordId - 1];
+
+    $attributes = $product->attributes();
+
+    unset($attributes[$attributeTitle]);
+
+    file_put_contents(getLatestUploadedFile(), $products->asXML());
 
 }
