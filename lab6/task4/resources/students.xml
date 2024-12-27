@@ -8,4 +8,13 @@
         <name>Мария Смирнова</name>
         <faculty>Мехатроника</faculty>
     </student>
+    <student id="3">
+        <name>Мария Тихонова</name>
+        <faculty>Ядреная физика</faculty>
+    </student>
+    <student id="4">
+        <name>Евгений Евгеньев</name>
+        <faculty>Радиоволнование</faculty>
+        <course>Умнички</course>        
+    </student>
 </students>
