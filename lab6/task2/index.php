@@ -17,7 +17,7 @@ $index = 1;
 </head>
 <body>
 <div style="margin-bottom: 40px">
-    <form action="/" method="post" enctype="multipart/form-data">
+    <form action="/" method="POST" enctype="multipart/form-data">
         Select XML to upload:
         <input type="file" name="fileToUpload" id="fileToUpload">
         <input type="submit" value="Upload XML" name="submit">
